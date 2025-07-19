@@ -1,0 +1,179 @@
+   
+    .wrapper{
+        background-color: rgb(255, 255, 255);
+        background-size: cover;
+        height: 100vh; 
+        min-width: fit-content; 
+        max-width: 100%;       
+    }
+    .nav{
+        height: 90px;        
+        background-color:rgb(0, 17, 255);        
+        margin-bottom: 50px;
+    }
+    .nav image{
+        float: left;
+        
+    }
+    .nav ul{
+        float: right;
+        margin:none;
+        margin-right: 30px;
+        display:block;
+    }
+    .nav ul li{
+        display:inline-block;
+        list-style: none; 
+        padding: 15px;
+    }
+    .nav ul a{        
+        text-decoration: none;
+        color:white;
+        font-size: 22px;
+        font-family: 'Roboto', sans-serif;
+        transition: opacity 1s;         
+        padding-top: 15px;
+        padding-bottom: 15px;  
+        border-radius: 20px;   
+        transition: all 0.5s;
+    }
+    
+ 
+   .nav ul a:hover {
+        background: rgb(36, 123, 255);     
+        cursor: pointer;   
+        color:black;
+    }
+
+    .title{
+        font-size: 65px;
+        font-weight: bolder;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin-top: 0;
+        margin-bottom: 35px;
+        color: #0e56dd;        
+    }
+    .subtt{
+        font-size: 50px;
+        font-weight: solid;
+        font-family: fantasy;
+    }
+    .sidebar{
+        float: left;
+        margin-right: 30px;
+        display:flex;
+        height: 90%;
+        background-color: rgb(133, 196, 248);
+    }
+    .sidebar ul{
+        display: block; 
+       list-style: none;
+       padding: 0px;
+       align-content:normal;
+    }
+    .sidebar ul a{
+        text-decoration: none;    
+    }
+    .sidebar ul a li{       
+        padding: 10px;  
+        font-size: 22px;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;   
+        color: black;
+        padding:15px;
+        text-align: center;
+        border-bottom: solid;
+        border-width: 1px;
+       
+    }
+
+    .sidebar ul a li:hover{
+        background: blue;
+        cursor: pointer;
+        color:white;       
+        border: none;
+    }
+    .dc
+    {
+      display:  flex;
+    background: rgb(255, 255, 255);
+    gap:10px;   
+    flex-direction:row;   
+    }
+    .column {
+  flex: 1; /* Equal width for both columns */
+  padding: 20px;
+  border-left:1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 50%;
+    }
+
+    body { font-family: Arial; padding: 20px; background: #f2f2f2; }
+    .formulario { 
+        background: white; 
+        padding: 20px; 
+        max-width: 100%; 
+        margin: auto; 
+        border-radius: 8px; 
+        box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { 
+        display: block;
+         margin-top: 15px; }
+    select, input, textarea, button {
+      width: 98%; 
+      padding: 10px; 
+      margin-top: 5px;
+      border-radius: 15px; 
+      border: 1px solid #ccc;
+    }
+    textarea{
+        height:150px;
+    }
+    button { background: #0026ff; 
+        color: white; 
+        border: none; 
+        margin-top: 20px; 
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: solid;
+        
+        cursor: pointer;
+    transition: all 1s; }
+    button:hover { background: #099b7b; color: black;
+    opacity: 0.8;}
+
+
+    .btOp{
+        width: fit-content;
+        display: block;
+        object-position: center;
+        padding-left: 25px;
+        padding-right: 25px;
+        margin: auto;
+    }
+
+    .M{
+        text-align: center;
+    }
+    .txtesp{
+        font-size: 58px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bolder;   
+        letter-spacing: 3px;     
+        text-anchor: 20px;        
+        margin-top: 0;
+        margin-bottom: 35px;
+    }
+    .v{
+        font-size:20px;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bolder;  
+        padding-left: 10px;
+        text-align: left;
+        letter-spacing: 7px;
+    }
+    .v2{
+        font-size: 20px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bolder;        
+   }
+
