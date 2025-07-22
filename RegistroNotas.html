@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas</title>
+        <link rel="stylesheet" type="" href="style.css">  
+
+</head>
+<body>
+    <div class="Notas">
+        <h1>Selecciona una Opción</h1>
+        <h2 class="Dim">Inserte la dimensión del logro: </h2> <!--Dimensión dinámicos-->
+
+        <h2 class="LD">Inserte el nombre del logro</h2> <!--logros dinámicos-->
+        <p>Nombre alumno</p> 
+     
+        <a href="#opcion1" class="option">E</a>
+        <a href="#opcion2" class="option">S</a>
+        <a href="#opcion3" class="option">A</a>
+        <a href="#opcion4" class="option">NR</a>
+        <a href="#opcion4" class="option">NR</a>
+
+    </div>
+
+      <script>
+        document.querySelectorAll('.option').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault(); // Evita que el enlace navegue
+                // Remueve la clase 'selected' de todos los elementos
+                document.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                // Agrega la clase 'selected' al elemento clicado
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>

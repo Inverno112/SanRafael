@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de año académico</title>
+    <link rel="stylesheet" type="" href="style.css">  
+
+    <style>        
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 30%;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .cancel-btn {
+            background-color: #6c757d;
+            margin-top: 10px;
+        }
+        .cancel-btn:hover {
+            background-color: #5a6268;
+        }
+        .dimension-list {
+            margin-top: 20px;
+        }
+        .dimension-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dimension-item h3 {
+            margin: 0;
+            color: #007bff;
+            font-size: 1.2em;
+        }
+        .dimension-item p {
+            margin: 5px 0 0;
+            color: #333;
+        }
+        .dimension-item .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .dimension-item button {
+            width: auto;
+            padding: 5px 10px;
+            font-size: 0.9em;
+        }
+        .dimension-item .edit-btn {
+            background-color: #ffc107;
+        }
+        .dimension-item .edit-btn:hover {
+            background-color: #e0a800;
+        }
+        .dimension-item .delete-btn {
+            background-color: #dc3545;
+        }
+        .dimension-item .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Nuevo año académico!</h1>
+    <div class="dc">
+        
+        <div class="container column">
+            
+            <h1>Añadir Dimensiones</h1>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" placeholder="Ingresa el nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" placeholder="Ingresa la descripción" rows="4" required></textarea>
+            </div>
+            <button id="submitBtn" onclick="agregarOEditarDimension()">Añadir Dimensión</button>
+            <button id="cancelBtn" class="cancel-btn" style="display: none;" onclick="cancelarEdicion()">Cancelar</button>
+            <div class="dimension-list" id="dimensionList"></div>
+        </div>
+
+        <div class="container column">
+            <div class="form-group">
+                <label for="inicio">Inicio (Fecha y Hora):</label>
+                <input type="datetime-local" id="inicio" required>
+            </div>
+            <div class="form-group">
+                <label for="fin">Fin primer período (Fecha y Hora):</label>
+                <input type="datetime-local" id="fin" required>
+            </div>
+            <div class="form-group">
+                <label for="fin">Fin segundo período (Fecha y Hora):</label>
+                <input type="datetime-local" id="fin" required>
+            </div>
+            <div class="form-group">
+                <label for="fin">Fin tercer período (Fecha y Hora):</label>
+                <input type="datetime-local" id="fin" required>
+            </div>
+            <div class="form-group">
+                <label for="fin">Fin cuarto período (Fecha y Hora):</label>
+                <input type="datetime-local" id="fin" required>
+            </div>
+        </div>
+        <div class="container column">
+        <button>Iniciar año académico</button>        
+        </div>
+    </div>
+
+
+
+    <script>
+        let editIndex = null; // Para rastrear qué dimensión se está editando
+
+        function agregarOEditarDimension() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const descripcion = document.getElementById('descripcion').value.trim();
+            
+            if (!nombre || !descripcion) {
+                alert('Por favor, completa ambos campos.');
+                return;
+            }
+
+            const dimensionList = document.getElementById('dimensionList');
+
+            if (editIndex === null) {
+                // Añadir nueva dimensión
+                const dimensionItem = crearDimensionItem(nombre, descripcion);
+                dimensionList.appendChild(dimensionItem);
+            } else {
+                // Editar dimensión existente
+                const dimensionItem = dimensionList.children[editIndex];
+                dimensionItem.querySelector('h3').textContent = nombre;
+                dimensionItem.querySelector('p').textContent = descripcion;
+                cancelarEdicion();
+            }
+
+            // Limpiar el formulario
+            document.getElementById('nombre').value = '';
+            document.getElementById('descripcion').value = '';
+        }
+
+        function crearDimensionItem(nombre, descripcion) {
+            const dimensionItem = document.createElement('div');
+            dimensionItem.className = 'dimension-item';
+            dimensionItem.innerHTML = `
+                <div>
+                    <h3>${nombre}</h3>
+                    <p>${descripcion}</p>
+                </div>
+                <div class="actions">
+                    <button class="edit-btn" onclick="editarDimension(this)">Editar</button>
+                    <button class="delete-btn" onclick="eliminarDimension(this)">Eliminar</button>
+                </div>
+            `;
+            return dimensionItem;
+        }
+
+        function editarDimension(button) {
+            const dimensionItem = button.parentElement.parentElement;
+            editIndex = Array.from(document.getElementById('dimensionList').children).indexOf(dimensionItem);
+            
+            const nombre = dimensionItem.querySelector('h3').textContent;
+            const descripcion = dimensionItem.querySelector('p').textContent;
+
+            document.getElementById('nombre').value = nombre;
+            document.getElementById('descripcion').value = descripcion;
+            document.getElementById('submitBtn').textContent = 'Guardar Cambios';
+            document.getElementById('cancelBtn').style.display = 'block';
+        }
+
+        function eliminarDimension(button) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta dimensión?')) {
+                const dimensionItem = button.parentElement.parentElement;
+                dimensionItem.remove();
+                cancelarEdicion(); // Asegura que no quede en modo edición
+            }
+        }
+
+        function cancelarEdicion() {
+            editIndex = null;
+            document.getElementById('nombre').value = '';
+            document.getElementById('descripcion').value = '';
+            document.getElementById('submitBtn').textContent = 'Añadir Dimensión';
+            document.getElementById('cancelBtn').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

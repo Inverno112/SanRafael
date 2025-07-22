@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .filter-group select, .filter-group input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .filter-group select {
+            width: 150px;
+        }
+        .filter-group input {
+            flex-grow: 1;
+        }
+        .user-list {
+            margin-top: 20px;
+        }
+        .user-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-item h3 {
+            margin: 0;
+            color: #007bff;
+            font-size: 1.2em;
+        }
+        .user-item p {
+            margin: 5px 0 0;
+            color: #333;
+        }
+        .user-item .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .user-item button {
+            width: auto;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .user-item button:hover {
+            
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta de Usuarios</h1>
+        <div class="filter-group">
+            <select id="filterField">
+                <option value="nombre">Nombre</option>
+                <option value="apellido">Apellido</option>
+                <option value="curso">Curso</option>
+                <option value="email">Email</option>
+                <option value="numero">Teléfono</option>
+            </select>
+            <input type="text" id="filterInput" placeholder="Ingresa término de búsqueda" oninput="filtrarUsuarios()">
+        </div>
+        <div class="user-list" id="userList"></div>
+    </div>
+
+    <script>
+        // Datos de ejemplo (simulando una base de datos)
+        const usuarios = [
+            { nombre: "Juan", apellido: "Pérez", curso: "Matemáticas", email: "juan.perez@example.com", numero: "1234567890", clave: "clave123" },
+            { nombre: "María", apellido: "Gómez", curso: "Historia", email: "maria.gomez@example.com", numero: "0987654321", clave: "clave456" },
+            { nombre: "Carlos", apellido: "López", curso: "Programación", email: "carlos.lopez@example.com", numero: "1122334455", clave: "clave789" }
+        ];
+
+        function cargarUsuarios(filtro = '', campo = 'nombre') {
+            const userList = document.getElementById('userList');
+            userList.innerHTML = ''; // Limpiar la lista antes de cargar
+            const usuariosFiltrados = usuarios.filter(usuario => 
+                usuario[campo].toLowerCase().includes(filtro.toLowerCase())
+            );
+            usuariosFiltrados.forEach((usuario, index) => {
+                const userItem = crearUserItem(usuario, index);
+                userList.appendChild(userItem);
+            });
+        }
+
+        function crearUserItem(usuario, index) {
+            const userItem = document.createElement('div');
+            userItem.className = 'user-item';
+            userItem.innerHTML = `
+                <div>
+                    <h3>${usuario.nombre} ${usuario.apellido}</h3>
+                    <p>Curso: ${usuario.curso}</p>
+                    <p>Email: ${usuario.email}</p>
+                    <p>Teléfono: ${usuario.numero}</p>
+                    <p>Clave: ${'*'.repeat(usuario.clave.length)}</p>
+                </div>
+                <div class="actions">
+                    <button onclick="eliminarUsuario(${index})">Eliminar</button>
+                </div>
+            `;
+            return userItem;
+        }
+
+        function eliminarUsuario(index) {
+            if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+                usuarios.splice(index, 1); // Eliminar usuario del array
+                filtrarUsuarios(); // Recargar la lista con el filtro actual
+            }
+        }
+
+        function filtrarUsuarios() {
+            const filtro = document.getElementById('filterInput').value;
+            const campo = document.getElementById('filterField').value;
+            cargarUsuarios(filtro, campo);
+        }
+
+        // Cargar usuarios al iniciar la página
+        cargarUsuarios();
+    </script>
+</body>
+</html>

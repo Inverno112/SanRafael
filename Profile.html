@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=Jar, initial-scale=1.0">
+    <title>Jardín San Rafael</title>
+    <link rel="stylesheet" type="" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+     
+        <nav class="nav">
+            <ul>               
+                <li><a href="" >Cerrar Sesión</a></li>
+            </ul>
+        </nav>   
+        <aside class="sidebar">
+        <ul>
+        <a onclick="showContent('ST')"><li>Escribir nota</li></a>
+        <a onclick="showContent('Ob')"><li>Escribir circular</li></a>
+        <a onclick="showContent('B')"><li> Logros </li></a>
+        <a onclick="showContent('GU')"><li>Calificaciones</li></a>
+        <a onclick="showContent('RE')"><li>Guía de uso</li></a>      
+        </ul>        
+  </aside>
+
+   <div class="content" id="contenido">
+    <h1>Bienvenido</h1>
+    <p>Selecciona una opción del menú para ver el contenido.</p>
+  </div>
+        <script>
+    function mostrarContenido(seccion) {
+      const contenido = document.getElementById("contenido");
+
+      const secciones = {
+        ST: `
+          <h1>Inicio</h1>
+          <p>Esta es la página de inicio. Aquí va la información principal.</p>
+        `,
+        Ob: `
+          <h1>Perfil</h1>
+          <p>Aquí puedes ver y editar tu información personal.</p>
+        `,
+        B: `
+          <h1>Configuración</h1>
+          <p>Modifica las opciones del sistema aquí.</p>
+        `,
+        GU: `
+          <h1>Ayuda</h1>
+          <p>Encuentra respuestas a tus preguntas frecuentes.</p>
+        `,
+        Re: `
+          <h1>Contacto</h1>
+          <p>Envíanos un mensaje usando el siguiente formulario:</p>
+          <form onsubmit="enviarFormulario(event)">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" id="correo" name="correo" required>
+
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+            <button type="submit">Enviar</button>
+          </form>
+        `
+      };
+
+      contenido.innerHTML = secciones[seccion] || "<h1>Error</h1><p>Sección no encontrada.</p>";
+    }
+
+    function enviarFormulario(event) {
+      event.preventDefault(); // Evita que recargue la página
+      const nombre = document.getElementById("nombre").value;
+      const correo = document.getElementById("correo").value;
+      const mensaje = document.getElementById("mensaje").value;
+
+      alert(`Gracias por tu mensaje, ${nombre}!\n\nCorreo: ${correo}\nMensaje: ${mensaje}`);
+
+      // Aquí podrías enviar los datos al servidor con fetch(), por ejemplo.
+    }
+  </script>
+
+    
+</body>
+</html>*/

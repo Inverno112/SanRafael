@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>EnviarCircular</title>
+    <link rel="stylesheet" type="" href="style.css">  
+</head>
+<body>
+  <div class="formulario">
+    <h2>Nueva notita</h2>
+    <form>
+      <label for="para">Para:</label>
+      <select id="para" name="para" required>
+        <option value="">Cargando destinatarios...</option>
+      </select>
+
+      <label for="asunto">Asunto:</label>
+      <input type="text" id="asunto" name="asunto" required>
+
+      <label for="contenido">Contenido:</label>
+      <textarea id="contenido" name="contenido" required></textarea>
+
+      <button type="submit">Enviar</button>
+     <button type="button" onclick="window.location.href='inicio.html'">← Volver al inicio</button>
+
+    </form>
+  </div>
+
+  <script>
+    async function cargarDestinatarios() {
+      const response = await fetch('http://localhost:3000/destinatarios');
+      const datos = await response.json();
+
+      const select = document.getElementById('para');
+      select.innerHTML = '<option value="">Seleccione destinatario</option>';
+
+      datos.forEach(d => {
+        const option = document.createElement('option');
+        option.value = d.valor;
+        option.textContent = d.etiqueta;
+        select.appendChild(option);
+      });
+    }
+
+    cargarDestinatarios();
+  </script>
+
+</body>
+</html>
